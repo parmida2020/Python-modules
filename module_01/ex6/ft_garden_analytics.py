@@ -1,4 +1,7 @@
 class Plant:
+    @staticmethod
+    def check_year(age):
+        return age > 365
     def __init__(self, name: str, height: float, age: int):
         self.name = name
         self.height = height
@@ -20,39 +23,27 @@ class Flower(Plant):
         if self.bloomed == False:
             print(f" {self.name} has not bloomed yet")
         else:
-            print(f" {self.name} is blooming beautifully!\n")
-
+            print(f" {self.name} is blooming beautifully!")
+        
 class Tree(Plant):
     def __init__(self, name, height, age, trunk_diameter):
         super().__init__(name, height, age)
         self.trunk_diameter = trunk_diameter
     def produce_shade(self) ->None:
         print("[asking the oak to produce shade]")
-        print(f"Tree {self.name} now produces a shade of {self.height} long and {self.trunk_diameter}cm wide.\n")
+        print(f"Tree {self.name} now produces a shade of {self.height} long and {self.trunk_diameter}cm wide.")
     def show(self) ->None:
         super().show()
         print(f" Trunk diameter: {self.trunk_diameter}")
 
-class Vegetable(Plant):
-    def __init__(self, name, height, age, harvest_season):
-        super().__init__(name, height, age)
-        self.harvest_season = harvest_season
-        self.nutritional_value = 0
-    def grow(self) ->None:
-        self.height += 1
-    def age_up(self) ->None:
-        self.age += 1
-        self.nutritional_value += 1
-    def show(self) ->None:
-        super().show()
-        print(f" Harvest season: {self.harvest_season}")
-        print(f" Nutritional value: {self.nutritional_value}")
-
-def ft_plant_types() ->None:
-    print("=== Garden Plant Types ===")
+def ft_garden_analytics() ->None:
+    print("=== Garden statistics ===")
+    print("=== Check year-old")
+    print(f"Is 30 days more than a year? -> {Plant.check_year(30)}")
+    print(f"Is 400 days more than a year? -> {Plant.check_year(400)}\n")
     rose = Flower("Rose", 15.0, 14, "pink")
     oak = Tree("Oak", 200.0, 365, 5.0)
-    tomato = Vegetable("Tomato", 5.0, 10, "september")
+    
     print("=== Flower")
     rose.show()
     rose.bloom()
@@ -61,13 +52,6 @@ def ft_plant_types() ->None:
     oak.show()
     oak.produce_shade()
     oak.show()
-    print("=== Vegteble")
-    tomato.show()
-    print("[make tomato grow and age for 20 days]")
-    for i in range(20):
-        tomato.grow()
-        tomato.age_up()
-    tomato.show()
 
 if __name__ == "__main__":
-    ft_plant_types()
+    ft_garden_analytics()

@@ -5,10 +5,13 @@ class Plant:
         self._age = age
     def show(self) ->None:
         print(f"Plant created: {self.name}: {self._height}cm, {self._age} days old")
+    
     def get_height(self)-> float:
      return self._height
+    
     def get_age(self)-> int:
          return self._age
+    
     def set_height(self, height: float)-> None:
         if height < 0:
             print(f"\n{self.name}: Error, height can't be negative")
@@ -16,6 +19,7 @@ class Plant:
             return
         self._height = height
         print(f"\nHeight updated: {height}cm")
+    
     def set_age(self, age: int)-> None:
         if age < 0:
             print(f"{self.name}: Error, age can't be negative")
