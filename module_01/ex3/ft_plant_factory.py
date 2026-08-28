@@ -3,10 +3,12 @@ class Plant:
         self.name = name
         self.height = height
         self.age = age
-    def show(self) ->None:
+
+    def show(self) -> None:
         print(f"Created: {self.name}: {self.height}cm, {self.age} days old")
- 
-def ft_plant_factory()-> None:
+
+
+def ft_plant_factory() -> None:
     print("=== Plant Factory Output ===")
     rose = Plant("Rose", 25.5, 30)
     oak = Plant("Oak", 200, 365)
@@ -17,5 +19,6 @@ def ft_plant_factory()-> None:
     for plant in plants:
         plant.show()
 
+
 if __name__ == "__main__":
-     ft_plant_factory()
+    ft_plant_factory()
