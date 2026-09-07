@@ -36,7 +36,7 @@ class Tree(Plant):
         print(f"[asking the {self.name} to produce shade]")
         print(
               f"Tree {self.name.lower()} now produces a shade of {self.height}"
-              f" long and {self.trunk_diameter}cm wide.\n"
+              f"cm long and {self.trunk_diameter}cm wide.\n"
         )
 
     def show(self) -> None:
