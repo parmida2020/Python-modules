@@ -8,7 +8,7 @@ class Plant:
         def display(self) -> None:
             print(
                 f"Stats: {self.grow_count} grow, {self.age_count} age, "
-                f" {self.show_count} show\n"
+                f" {self.show_count} show"
             )
 
     @staticmethod
@@ -58,8 +58,19 @@ class Flower(Plant):
 
 
 class Tree(Plant):
+    class Statics(Plant.Statics):
+        def __init__(self):
+            super().__init__()
+            self.shade_count = 0
+
+        def show(self) -> None:
+            super().display()
+            print(f" {self.shade_count} shade")
+            self.shade_count += 1
+
     def __init__(self, name, height, age, trunk_diameter):
         super().__init__(name, height, age)
+        self.statics = Tree.Statics()
         self.trunk_diameter = trunk_diameter
 
     def produce_shade(self) -> None:
@@ -68,6 +79,7 @@ class Tree(Plant):
             f"Tree {self.name} now produces a shade of {self.height} long "
             f"and {self.trunk_diameter}cm wide."
         )
+        self.statics.shade_count += 1
 
     def show(self) -> None:
         super().show()
@@ -79,10 +91,12 @@ class Seed(Plant):
         super().__init__(name, height, age)
         self.color = color
         self.bloomed = False
+        self.seed_count = 0
 
     def bloom(self) -> None:
         print(f"[asking the {self.name} to grow and bloom]")
         self.bloomed = True
+        self.seed_count = 42
 
     def show(self) -> None:
         super().show()
@@ -91,6 +105,7 @@ class Seed(Plant):
             print(f" {self.name} has not bloomed yet")
         else:
             print(f" {self.name} is blooming beautifully!")
+        print(f"Seeds: {self.seed_count}")
 
 
 def display_stats(Plant) -> None:
@@ -102,28 +117,32 @@ def ft_garden_analytics() -> None:
     print("=== Garden statistics ===")
     print("=== Check year-old")
     print(f"Is 30 days more than a year? -> {Plant.check_year(30)}")
-    print(f"Is 400 days more than a year? -> {Plant.check_year(400)}\n")
+    print(f"Is 400 days more than a year? -> {Plant.check_year(400)}")
     rose = Flower("Rose", 15.0, 14, "pink")
     oak = Tree("Oak", 200.0, 365, 5.0)
     sunflower = Seed("sunflower", 80.0, 45, "yellow")
-    print("=== Flower")
+    print("\n=== Flower")
     rose.show()
     display_stats(rose)
     rose.grow()
     rose.bloom()
     rose.show()
     display_stats(rose)
-    print("=== Tree")
+    print("\n=== Tree")
     oak.show()
+    display_stats(oak)
     oak.produce_shade()
-    print("=== Seed")
+    oak.show()
+    display_stats(oak)
+    print("\n=== Seed")
     sunflower.show()
     display_stats(sunflower)
     sunflower.grow()
     sunflower.bloom()
+    sunflower.age_up()
     sunflower.show()
     display_stats(sunflower)
-    print("=== Anonymous")
+    print("\n=== Anonymous")
     unknownplant = Plant.annonymous_plant()
     unknownplant.show()
     display_stats(unknownplant)
