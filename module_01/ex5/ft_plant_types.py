@@ -15,7 +15,7 @@ class Flower(Plant):
         self.bloomed = False
 
     def bloom(self) -> None:
-        print(f"[asking the {self.name} to bloom]")
+        print(f"[asking the {self.name.lower()} to bloom]")
         self.bloomed = True
 
     def show(self) -> None:
@@ -41,7 +41,7 @@ class Tree(Plant):
 
     def show(self) -> None:
         super().show()
-        print(f" Trunk diameter: {self.trunk_diameter}")
+        print(f" Trunk diameter: {self.trunk_diameter}cm")
 
 
 class Vegetable(Plant):
@@ -67,7 +67,7 @@ def ft_plant_types() -> None:
     print("=== Garden Plant Types ===")
     rose = Flower("Rose", 15.0, 14, "pink")
     oak = Tree("Oak", 200.0, 365, 5.0)
-    tomato = Vegetable("Tomato", 5.0, 10, "september")
+    tomato = Vegetable("Tomato", 5.0, 10, "September")
     print("=== Flower")
     rose.show()
     rose.bloom()

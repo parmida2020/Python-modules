@@ -45,7 +45,7 @@ class Flower(Plant):
         self.bloomed = False
 
     def bloom(self) -> None:
-        print(f"[asking the {self.name} to grow and bloom]")
+        print(f"[asking the {self.name.lower()} to grow and bloom]")
         self.bloomed = True
 
     def show(self) -> None:
@@ -77,7 +77,7 @@ class Tree(Plant):
 
     def show(self) -> None:
         super().show()
-        print(f" Trunk diameter: {self.trunk_diameter}")
+        print(f" Trunk diameter: {self.trunk_diameter}cm")
 
 
 class Seed(Plant):
@@ -103,7 +103,7 @@ class Seed(Plant):
 
 
 def display_stats(Plant) -> None:
-    print(f"[Statitcs for {Plant.name}]")
+    print(f"[statistics for {Plant.name}]")
     Plant.statics.display()
 
 
@@ -114,7 +114,7 @@ def ft_garden_analytics() -> None:
     print(f"Is 400 days more than a year? -> {Plant.check_year(400)}")
     rose = Flower("Rose", 15.0, 14, "pink")
     oak = Tree("Oak", 200.0, 365, 5.0)
-    sunflower = Seed("sunflower", 80.0, 45, "yellow")
+    sunflower = Seed("Sunflower", 80.0, 45, "yellow")
     print("\n=== Flower")
     rose.show()
     display_stats(rose)
@@ -127,7 +127,6 @@ def ft_garden_analytics() -> None:
     display_stats(oak)
     oak.show_shade()
     oak.produce_shade()
-    oak.show()
     display_stats(oak)
     oak.show_shade()
     print("\n=== Seed")
