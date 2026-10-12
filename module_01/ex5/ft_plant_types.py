@@ -53,7 +53,7 @@ class Vegetable(Plant):
     def grow(self) -> None:
         self.height += 1
 
-    def age_up(self) -> None:
+    def Age(self) -> None:
         self.age += 1
         self.nutritional_value += 1
 
@@ -77,10 +77,10 @@ def ft_plant_types() -> None:
     oak.produce_shade()
     print("=== Vegeteble")
     tomato.show()
-    print(f"[make {tomato.name} grow and age for 20 days]")
+    print(f"[make {tomato.name.lower()} grow and age for 20 days]")
     for i in range(20):
         tomato.grow()
-        tomato.age_up()
+        tomato.Age()
     tomato.show()
 
 
