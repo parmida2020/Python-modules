@@ -58,20 +58,11 @@ class Flower(Plant):
 
 
 class Tree(Plant):
-    class Statics(Plant.Statics):
-        def __init__(self):
-            super().__init__()
-            self.shade_count = 0
-
-        def show(self) -> None:
-            super().display()
-            print(f" {self.shade_count} shade")
-            self.shade_count += 1
-
     def __init__(self, name, height, age, trunk_diameter):
         super().__init__(name, height, age)
         self.statics = Tree.Statics()
         self.trunk_diameter = trunk_diameter
+        self.shade_count = 0
 
     def produce_shade(self) -> None:
         print("[asking the oak to produce shade]")
@@ -79,7 +70,10 @@ class Tree(Plant):
             f"Tree {self.name} now produces a shade of {self.height} long "
             f"and {self.trunk_diameter}cm wide."
         )
-        self.statics.shade_count += 1
+        self.shade_count += 1
+
+    def show_shade(self) -> None:
+        print(f"{self.shade_count} shade")
 
     def show(self) -> None:
         super().show()
@@ -131,9 +125,11 @@ def ft_garden_analytics() -> None:
     print("\n=== Tree")
     oak.show()
     display_stats(oak)
+    oak.show_shade()
     oak.produce_shade()
     oak.show()
     display_stats(oak)
+    oak.show_shade()
     print("\n=== Seed")
     sunflower.show()
     display_stats(sunflower)

@@ -35,7 +35,7 @@ class Tree(Plant):
     def produce_shade(self) -> None:
         print(f"[asking the {self.name} to produce shade]")
         print(
-              f"Tree {self.name.lower()} now produces a shade of {self.height}"
+              f"Tree {self.name} now produces a shade of {self.height}"
               f"cm long and {self.trunk_diameter}cm wide.\n"
         )
 
@@ -77,7 +77,7 @@ def ft_plant_types() -> None:
     oak.produce_shade()
     print("=== Vegeteble")
     tomato.show()
-    print(f"[make {tomato.name.lower()} grow and age for 20 days]")
+    print(f"[make {tomato.name} grow and age for 20 days]")
     for i in range(20):
         tomato.grow()
         tomato.age_up()

@@ -1,14 +1,19 @@
 class Plant:
-    def __init__(self, name: str, height: float, age: int) -> None:
+    def __init__(self, name: str, height: float,
+                 age: int, growth: float) -> None:
         self.name = name
-        self._height = height
-        self._age = age
+        self.height = height
+        self.age = age
+        self.growth = growth
+
+    def Age(self) -> None:
+        self.age += 1
+
+    def grow(self) -> None:
+        self.height = round(self.height + self.growth, 2)
 
     def show(self) -> None:
-        print(
-            f"Plant created: {self.name}: {self._height}cm,"
-            f"{self._age} days old"
-        )
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
 
     def get_height(self) -> float:
         return self._height
@@ -35,14 +40,14 @@ class Plant:
 
 def ft_garden_security() -> None:
     print("=== Garden Security System ===")
-    flower = Plant("Rose", 15.5, 10)
+    flower = Plant("Rose", 15.5, 10, 0.0)
     flower.show()
-    flower.set_height(25)
-    flower.set_age(49)
+    flower.set_height(25.0)
+    flower.set_age(30)
     flower.set_height(-7.56)
     flower.set_age(-10)
     print(
-          f"\nCurrent state: {flower.name.lower()}: {flower.get_height()}cm,"
+          f"\nCurrent state: {flower.name}: {flower.get_height()}cm, "
           f"{flower.get_age()} days old"
     )
 

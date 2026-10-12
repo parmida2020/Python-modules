@@ -1,19 +1,19 @@
 class Plant:
     def __init__(self, name: str, height: float,
-                 plantAge: int, growth: float) -> None:
+                 age: int, growth: float) -> None:
         self.name = name
         self.height = height
-        self.plantAge = plantAge
+        self.age = age
         self.growth = growth
 
-    def age(self) -> None:
-        self.plantAge += 1
+    def Age(self) -> None:
+        self.age += 1
 
     def grow(self) -> None:
         self.height = round(self.height + self.growth, 2)
 
     def show(self) -> None:
-        print(f"{self.name}: {self.height}cm, {self.plantAge} days old")
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 def ft_plant_growth() -> None:
@@ -24,7 +24,7 @@ def ft_plant_growth() -> None:
     day = 1
     while (day < 8):
         print(f"=== Day {day} ===")
-        flower.age()
+        flower.Age()
         flower.grow()
         flower.show()
         day += 1
