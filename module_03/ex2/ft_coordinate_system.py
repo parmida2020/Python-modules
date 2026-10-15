@@ -1,13 +1,15 @@
 import math
 
+
 def get_player_pos() -> tuple[float, float, float]:
     while True:
-        coordinates = input("Enter new coordinates as floats in format 'x,y,z':")
+        coordinates = input("Enter new coordinates as"
+                            " floats in format 'x,y,z':")
         parts = coordinates.split(",")
         if len(parts) != 3:
             print("Invalid syntax")
-            continue # skip the rest of the code and goes back to the next iteration
-        values: list[float] = [] # create an empty list to put the values inside
+            continue  # skip the rest code and goes back -> next iteration
+        values: list[float] = []  # create an empty list -> values inside
         valid = True
         for part in parts:
             part = part.strip()
@@ -17,8 +19,8 @@ def get_player_pos() -> tuple[float, float, float]:
                 print(f"Error on parameter '{part}': {e}")
                 valid = False
                 break
-        if valid: # we want to make sure that all the 3 values are valid
-            return (values[0], values[1], values[2]) # tuple
+        if valid:  # we want to make sure that all the 3 values are valid
+            return (values[0], values[1], values[2])  # tuple
 # first im creating a list instead of a tuple(to add the values
 # inside of it) then im returning it as a tuple
 
