@@ -2,7 +2,7 @@ import sys
 
 
 def main() -> None:
-    my_dict: dict = {}
+    inventory: dict = {}
     for args in sys.argv[1:]:
         if ":" not in args:
             print(f"Error - invalid parameter '{args}'")
@@ -11,39 +11,39 @@ def main() -> None:
         if not key or not value:
             print(f"Error - invalid parameter '{args}'")
             continue
-        if key in my_dict.keys():
+        if key in inventory.keys():
             print(f"Redundant item '{key}' - discarding")
             continue
         try:
-            my_dict[key] = int(value)
+            inventory[key] = int(value)
         except ValueError as error:
             print(f"Quantity error for '{key}': {error} ")
-    if my_dict == {}:
+    if inventory == {}:
         print("!! INVENTORY IS EMPTY")
         return
-    print(f"Got inventory: {my_dict}")
-    print(f"Item list: {list(my_dict.keys())}")
-    total = sum(my_dict.values())
+    print(f"Got inventory: {inventory}")
+    print(f"Item list: {list(inventory.keys())}")
+    total = sum(inventory.values())
     print(
-            f"Total quantity of the {len(my_dict)} items:"
+            f"Total quantity of the {len(inventory)} items:"
             f" {total}"
         )
     if total > 0:
-        for item in my_dict.keys():
-            percentage = ((my_dict[item] / total) * 100)
+        for item in inventory.keys():
+            percentage = ((inventory[item] / total) * 100)
             print(f"Item {item} represents {round(percentage, 1)}%")
-    items = list(my_dict.keys())
+    items = list(inventory.keys())
     most = items[0]
     least = items[0]
     for item in items[1:]:
-        if my_dict[item] > my_dict[most]:
+        if inventory[item] > inventory[most]:
             most = item
-        if my_dict[item] < my_dict[least]:
+        if inventory[item] < inventory[least]:
             least = item
-    print(f"Item most abundant: {most} with quantity {my_dict[most]}")
-    print(f"Item least abundant: {least} with quantity {my_dict[least]}")
-    my_dict.update({"magic_item": 1})
-    print(f"Updated inventory: {my_dict}")
+    print(f"Item most abundant: {most} with quantity {inventory[most]}")
+    print(f"Item least abundant: {least} with quantity {inventory[least]}")
+    inventory.update({"magic_item": 1})
+    print(f"Updated inventory: {inventory}")
 
 
 if __name__ == "__main__":
