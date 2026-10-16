@@ -4,13 +4,11 @@ import sys
 def main() -> None:
     print("===  Player Score Analytics ===")
     scores: list[int] = []
-    i = 1
-    while i < len(sys.argv):
+    for item in sys.argv:
         try:
-            scores += [int(sys.argv[i])]
+            scores += [int(item)]
         except ValueError:
-            print(f"Invalid parameter: {sys.argv[i]}")
-        i += 1
+            print(f"Invalid parameter: {item}")
     if len(scores) == 0:
         print(
             "No scores provided. Usage: python3"
