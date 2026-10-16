@@ -25,7 +25,7 @@ def consume_event(
 
 def main() -> None:
     print("=== Game Data Stream Processor ===")
-    event_gen = gen_event()
+    event_gen = gen_event()  # to save the generator to ask for the next event
     for i in range(1000):
         name, action = next(event_gen)
         print(f"Event {i}: Player {name} did action {action}")

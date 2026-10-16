@@ -2,7 +2,7 @@ import sys
 
 
 def main() -> None:
-    inventory: dict = {}
+    inventory: dict[str, int] = {}
     for args in sys.argv[1:]:
         if ":" not in args:
             print(f"Error - invalid parameter '{args}'")
@@ -11,13 +11,18 @@ def main() -> None:
         if not key or not value:
             print(f"Error - invalid parameter '{args}'")
             continue
-        if key in inventory.keys():
+        if key in inventory:
             print(f"Redundant item '{key}' - discarding")
             continue
         try:
-            inventory[key] = int(value)
-        except ValueError as error:
-            print(f"Quantity error for '{key}': {error} ")
+            quantity = int(value)
+        except ValueError as e:
+            print(f"Quantity error for '{key}': {e}")
+            continue
+        if int(value) < 0:
+            print(f"Error - nagative quantity for {key}")
+            continue
+        inventory[key] = quantity
     if inventory == {}:
         print("!! INVENTORY IS EMPTY")
         return
