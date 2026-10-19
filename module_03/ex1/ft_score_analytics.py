@@ -4,7 +4,7 @@ import sys
 def main() -> None:
     print("===  Player Score Analytics ===")
     scores: list[int] = []
-    for item in sys.argv:
+    for item in sys.argv[1:]:
         try:
             scores += [int(item)]
         except ValueError:

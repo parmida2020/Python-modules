@@ -8,19 +8,25 @@ def main() -> None:
             print(f"Error - invalid parameter '{args}'")
             continue
         key, value = args.split(":", 1)
-        if not key or not value:
+        if not key or not value:  # empty keys and values
             print(f"Error - invalid parameter '{args}'")
             continue
-        if key in inventory:
+        try:  # numeric-only keys
+            int(key)
+            print(f"Error - invalid parameter '{args}'")
+            continue
+        except ValueError:
+            pass
+        if key in inventory:  # duplicate names
             print(f"Redundant item '{key}' - discarding")
             continue
         try:
             quantity = int(value)
-        except ValueError as e:
+        except ValueError as e:  # value is not an int
             print(f"Quantity error for '{key}': {e}")
             continue
-        if int(value) < 0:
-            print(f"Error - nagative quantity for {key}")
+        if int(value) < 0:  # negative numbers for values
+            print(f"Error - negative quantity for {key}")
             continue
         inventory[key] = quantity
     if inventory == {}:
@@ -33,7 +39,7 @@ def main() -> None:
             f"Total quantity of the {len(inventory)} items:"
             f" {total}"
         )
-    if total > 0:
+    if total > 0:  # avoid ZeroDivisionError
         for item in inventory.keys():
             percentage = ((inventory[item] / total) * 100)
             print(f"Item {item} represents {round(percentage, 1)}%")
