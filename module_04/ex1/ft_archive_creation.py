@@ -3,7 +3,7 @@ import typing
 
 def main() -> None:
     if len(sys.argv) != 2:
-        print("Usage: ft_ancient_txt.py <file>")
+        print(f"Usage: {sys.argv[0]} <file>")
         return
     filename = sys.argv[1]
     print("=== Cyber Archives Recovery ===")
