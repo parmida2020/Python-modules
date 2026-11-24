@@ -16,8 +16,8 @@ def main() -> None:
             print(f"Error - invalid parameter '{args}'")
             continue
         except ValueError:
-            pass
-        if key in inventory:  # duplicate names
+            pass  # does nothing
+        if key in inventory:  # duplicate names - checking with "in"
             print(f"Redundant item '{key}' - discarding")
             continue
         try:
@@ -26,7 +26,7 @@ def main() -> None:
             print(f"Quantity error for '{key}': {e}")
             continue
         if int(value) < 0:  # negative numbers for values
-            print(f"Error - negative quantity for {key}")
+            print(f"Error - negative quantity for '{key}'")
             continue
         inventory[key] = quantity
     if inventory == {}:

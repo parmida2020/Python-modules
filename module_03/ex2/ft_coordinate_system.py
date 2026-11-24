@@ -39,3 +39,5 @@ if __name__ == "__main__":
         print(f"Distance between the 2 sets of coordinates: {dis2}")
     except KeyboardInterrupt:
         print("Program terminated by user.")
+    except EOFError:
+        print("EOFError")

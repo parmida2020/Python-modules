@@ -8,8 +8,8 @@ achievements: list[str] = [
 
 
 def gen_player_achievements() -> set[str]:
-    num = random.randint(5, 10)
-    selected = random.sample(list(achievements), num)
+    num = random.randint(5, 10)  # integer selected from the range
+    selected = random.sample(list(achievements), num)  # returns a list
     return set(selected)
 
 

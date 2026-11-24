@@ -6,7 +6,11 @@ def main() -> None:
     scores: list[int] = []
     for item in sys.argv[1:]:
         try:
-            scores += [int(item)]
+            score = int(item)
+            if score < 0:
+                print(f"Invalid score: {item}. scores cannot be negative.")
+            else:
+                scores.append(score)  # add score to end of the list
         except ValueError:
             print(f"Invalid parameter: {item}")
     if len(scores) == 0:
@@ -25,4 +29,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    print("hello")
     main()
