@@ -6,11 +6,12 @@ actions = ["run", "eat", "sleep", "grab", "move",
            "swim", "climb", "use", "release"]
 
 
+# Generator[YieldType, SendType, ReturnType]
 def gen_event() -> typing.Generator[tuple[str, str], None, None]:
-    while True:
+    while True:  # Generator function
         name = random.choice(players)
         action = random.choice(actions)
-        yield (name, action)
+        yield (name, action)  # produces value 1 at a time
 
 
 def consume_event(
@@ -19,7 +20,8 @@ def consume_event(
     while events:
         index = random.randrange(len(events))
         event = events[index]
-        events[:] = events[:index] + events[index + 1:]
+        events[:] = events[:index] + events[index + 1:]  # replacing content
+        # everytng up to but not including i + everytng after i
         yield event
 
 
