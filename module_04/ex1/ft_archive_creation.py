@@ -1,51 +1,48 @@
 import sys
 import typing
 
+
 def main() -> None:
     if len(sys.argv) != 2:
         print(f"Usage: {sys.argv[0]} <file>")
         return
     filename = sys.argv[1]
-    print("=== Cyber Archives Recovery ===")
+    print("=== Cyber Archives Recovery & Preservation ===")
     print(f"Accessing file '{filename}'")
     try:
-        file : typing.IO[str] = open(filename)
+        file: typing.IO[str] = open(filename)
         content = file.read()
         print("---")
         print(f"\n{content}\n")
         print("---")
         file.close()
         print(f"File '{filename}' closed.")
-        print("\nTransform data:")
-        print("---")
-        new_content = ""
-        check = 0
-        for i in content:
-            check += 1
-            if i == "\n":
-                new_content += "#\n"
-            elif check == len(content):
-                new_content += i + "#"
-            else:
-                new_content += i
-        print(f"\n{new_content}\n")
-        print("---")
-    except FileNotFoundError as e:
+    except OSError as e:
         print(f"Error opening file '{filename}':", e)
-    except PermissionError as e:
-        print(f"Error opening file '{filename}':", e)
+        return
+    print("\nTransform data:")
+    print("---")
+    new_content = "#\n".join(content.split("\n"))
+    if content and not content.endswith("\n"):
+        new_content += "#"
+    print(f"\n{new_content}\n")
+    print("---")
     try:
         save_name = input("Enter new file name (or empty): ")
         if save_name == "":
             print("Not saving data.")
         else:
             print(f"Saving data to '{save_name}'")
-            new_file : typing.IO[str] = open(save_name, "w")
+            new_file: typing.IO[str] = open(save_name, "w")
             new_file.write(new_content)
             new_file.close()
             print(f"Data saved in file '{save_name}'.")
     except KeyboardInterrupt:
         print("Error --- ending program")
+    except EOFError:
+        print("EOFError")
+    except OSError as e:
+        print(f"Error opening file '{filename}':", e)
 
 
 if __name__ == "__main__":

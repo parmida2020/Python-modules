@@ -1,6 +1,7 @@
 import sys
 import typing
 
+
 def main() -> None:
     if len(sys.argv) != 2:
         print(f"Usage: {sys.argv[0]} <file>")
@@ -9,14 +10,12 @@ def main() -> None:
     print("=== Cyber Archives Recovery & Preservation ===")
     print(f"Accessing file '{filename}'")
     try:
-        file : typing.IO[str] = open(filename)
+        file: typing.IO[str] = open(filename)
         content = file.read()
         file.close()
-    except FileNotFoundError as e:
-        print(f"[STDERR] Error opening file '{filename}': {e}", file=sys.stderr)
-        return
-    except PermissionError as e:
-        print(f"[STDERR] Error opening file '{filename}': {e}", file=sys.stderr)
+    except OSError as e:
+        print(
+            f"[STDERR] Error opening file '{filename}': {e}", file=sys.stderr)
         return
     print("---\n")
     print(content, end="")
@@ -26,16 +25,9 @@ def main() -> None:
     print(f"File '{filename}' closed.")
     print("\nTransform data:")
     print("---\n")
-    new_content = ""
-    check = 0
-    for i in content:
-        check += 1
-        if i == "\n":
-            new_content += "#\n"
-        elif check == len(content):
-            new_content += i + "#"
-        else:
-            new_content += i
+    new_content = "#\n".join(content.split("\n"))
+    if content and not content.endswith("\n"):
+        new_content += "#"
     print(new_content, end="")
     if new_content != "" and new_content[-1] != "\n":
         print()
@@ -50,10 +42,15 @@ def main() -> None:
             print("Not saving data.")
             return
         print(f"Saving data to '{save_name}'")
-        new_file : typing.IO[str] = open(save_name, "w")
+        new_file: typing.IO[str] = open(save_name, "w")
         new_file.write(new_content)
         new_file.close()
         print(f"Data saved in file '{save_name}'.")
+    except OSError as e:
+        print(
+            f"[STDERR] Error opening file '{save_name}': {e}", file=sys.stderr
+            )
+        print("Data not saved.")
     except KeyboardInterrupt:
         print("\nError --- ending program", file=sys.stderr)
 
