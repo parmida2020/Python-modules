@@ -2,7 +2,7 @@ def secure_archive(
         filename: str, action: str = "read", content: str = ""
         ) -> tuple[bool, str]:
     try:
-        if action == "read":        
+        if action == "read":
             with open(filename, "r") as file:
                 result = file.read()
             return True, result
@@ -23,6 +23,12 @@ if __name__ == "__main__":
     print(secure_archive("/not/existing/file", "read"))
     print("")
     print("Using 'secure_archive' to read from an inaccessible file:")
-    print(secure_archive("/etc/master.passwd", "read"))
+    print(secure_archive("/etc/shadow", "read"))
+# with master.passwd -> Errno2(no such file)/we want Errno13(permission denied)
     print("")
-    print(secure_archive("ancient_fragment.txt", "read"))
+    print("Using 'secure_archive' to read from a regular file:")
+    res = secure_archive("ancient_fragment.txt", "read")
+    print(res)
+    print("")
+    print("Using 'secure_archive' to write previous content to a new file:")
+    print(secure_archive("new_fragment.txt", "write", res[1]))
